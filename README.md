@@ -32,7 +32,8 @@ A firebase project with Firebase Realtime Database must have been previously set
 	2. `Functions`
 	3. `Hosting`
 6. Do no overwrite existing files if prompted from the cli.
-7. Run `firebase deploy`
+7. Run `firebase serve` to test and debug functions and hosting locally.
+7. Run `firebase deploy` to commit final updates online.
 
 **Date created:** 20180805<br>
 **Date modified:** 20180805
