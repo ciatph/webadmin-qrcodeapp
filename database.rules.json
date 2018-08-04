@@ -1,6 +1,46 @@
 {
   "rules": {
-    ".read": false,
-    ".write": false
+    ".read": "auth != null && auth.token.email === 'oelmapps@gmail.com'",
+    ".write": "auth != null && auth.token.email === 'oelmapps@gmail.com'",
+    // Users are admin-verified users of this app, from guestbook
+    // They can view, edit and delete their own messages.
+    // Only the super admin can write valid registered users here
+    "users": {
+      ".read": "auth != null || auth.token.email === 'oelmapps@gmail.com'",
+      ".write": "auth != null && auth.token.email === 'oelmapps@gmail.com'",
+      "$uid": {
+      	".read": "auth.uid === $uid || auth.token.email === 'oelmapps@gmail.com'",
+      	".write": "auth.token.email === 'oelmapps@gmail.com'"           
+      }     
+    },  
+    "users_temp": {
+      "$uid": {
+      	".read": "auth.uid === $uid",
+      	".write": "auth.uid === $uid"         
+      }  
+    },
+    // Allow new users to provide non-auth defaults registration details  
+    // Delete user guestbook data upon admin-approval, transfer details to users
+    // Only the super admin account can modify this data
+    "guestbook": {
+      ".read": "auth.token.email === 'oelmapps@gmail.com'",
+      ".write": "!data.exists() || !newData.exists() && auth != null",
+      "$uid": {
+        ".write": "auth != null || auth.token.email === 'oelmapps@gmail.com'",
+        ".validate": "newData.hasChildren(['fname', 'lname', 'email', 'date_created'])"        
+      }
+    },  
+    "guestbook_names": {
+      ".read": "auth.token.email === 'oelmapps@gmail.com'",
+      ".write": "!data.exists() || !newData.exists() && auth != null",  // added  && auth != null
+      "$uid": {
+        ".write": "auth != null || auth.token.email === 'oelmapps@gmail.com'",
+        ".validate": "newData.hasChildren(['fname', 'lname', 'email', 'date_created'])"        
+      }
+    },      
+    "count": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
   }
 }
