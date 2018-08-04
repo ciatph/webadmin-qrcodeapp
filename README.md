@@ -31,9 +31,20 @@ A firebase project with Firebase Realtime Database must have been previously set
 	1. `Database`
 	2. `Functions`
 	3. `Hosting`
-6. Do no overwrite existing files if prompted from the cli.
-7. Run `firebase serve` to test and debug functions and hosting locally.
-7. Run `firebase deploy` to commit final updates online.
+6. _What file should be used for Database Rules?_
+	1. Use the default `database.rules.json`
+7. _What language would you like to use to write Cloud Functions? (Use arrow keys)_
+	1. Choose `JavaScript`
+6. **Do no overwrite existing files if prompted from the cli.**
+7. _Do you want to install dependencies with npm now? (Y/n)_
+	1. Choose `Y` 
+8. _What do you want to use as your public directory? (public)_ 
+	1. - Choose `Y`
+9. _Configure as a single-page app (rewrite all urls to /index.html)? (y/N)_ 
+	1. - Choose N
+10. Run `firebase serve` to test and debug functions and hosting locally.
+	1. Press `Ctrl + C` to stop local server
+11. Run `firebase deploy` to commit final updates online.
 
 **Date created:** 20180805<br>
 **Date modified:** 20180805
