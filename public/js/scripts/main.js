@@ -5,11 +5,18 @@ var App = function(){
     this.btn_login = document.getElementById('signin');
     this.btn_reg = document.getElementById('signup');
 
+    this.login_email = document.getElementById('login_email');
+    this.login_pass = document.getElementById('login_password');
+
+    this.reg_fname = document.getElementById('reg_fname');
+    this.reg_lname = document.getElementById('reg_lname');
+    this.reg_email = document.getElementById('reg_email');
+    this.reg_pass = document.getElementById('reg_password');        
+
     this.btn_reg.addEventListener('click', this.swapInterface.bind(this));
     this.btn_login.addEventListener('click', this.swapInterface.bind(this));
 };
 
-var t;
 
 
 /**
