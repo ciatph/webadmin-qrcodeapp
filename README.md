@@ -25,26 +25,28 @@ A firebase project with Firebase Realtime Database must have been previously set
 2. Delete `.firebaserc`
 3. Login to your firebase account using the firebase cli (from the command line).
 4. Initialize the project from the firebase cli.
-	1. `firebase init`
-5. Select your project name (previously set-up from firebase web console).
-5. Choose
+	- `firebase init`
+5. **Do no overwrite existing files if prompted from the cli.**
+6. Select your project name (previously set-up from firebase web console).
+7. Choose
 	1. `Database`
 	2. `Functions`
 	3. `Hosting`
-6. _What file should be used for Database Rules?_
-	1. Use the default `database.rules.json`
-7. _What language would you like to use to write Cloud Functions? (Use arrow keys)_
-	1. Choose `JavaScript`
-6. **Do no overwrite existing files if prompted from the cli.**
-7. _Do you want to install dependencies with npm now? (Y/n)_
-	1. Choose `Y` 
-8. _What do you want to use as your public directory? (public)_ 
-	1. - Choose `Y`
-9. _Configure as a single-page app (rewrite all urls to /index.html)? (y/N)_ 
-	1. - Choose N
-10. Run `firebase serve` to test and debug functions and hosting locally.
-	1. Press `Ctrl + C` to stop local server
-11. Run `firebase deploy` to commit final updates online.
+8. _What file should be used for Database Rules?_
+	- Use the default `database.rules.json`
+9. _What language would you like to use to write Cloud Functions? (Use arrow keys)_
+	- Choose `JavaScript`
+10. _Do you want to use ESLint to catch probable bugs and enforce style? (y/N)_
+	- Choose `Y`
+11. _Do you want to install dependencies with npm now? (Y/n)_
+	- Choose `Y` 
+12. _What do you want to use as your public directory? (public)_ 
+	- Press Enter (yes)
+13. _Configure as a single-page app (rewrite all urls to /index.html)? (y/N)_ 
+	- Choose `N`
+14. Run `firebase serve` to test and debug functions and hosting locally.
+	- Press `Ctrl + C` to stop local server
+15. Run `firebase deploy` to commit final updates online.
 
 **Date created:** 20180805<br>
 **Date modified:** 20180805
