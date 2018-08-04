@@ -55,9 +55,19 @@ A firebase project with Firebase Realtime Database must have been previously set
 	- Press Enter (yes)
 13. _Configure as a single-page app (rewrite all urls to /index.html)? (y/N)_ 
 	- Choose `N`
-14. Run `firebase serve` to test and debug functions and hosting locally.
+
+### Update and Upload Firebase Functions
+1. Navigate into the /functions directory from the command line.
+2. Run `npm i --save firebase-functions`
+3. Run `npm install`
+4. Open `/functions/index.js` and replace all instances of `oelmapps@gmail.com` with <YOUR\_GOOGLE\_ACCOUNT>.
+5. Upload the functions (for user registration & login to work)
+   - `firebase deploy --only functions2`
+
+### Run the Website
+1. Run `firebase serve` to test and debug functions and hosting locally.
 	- Press `Ctrl + C` to stop local server
-15. Run `firebase deploy` to commit final updates online.
+2. Run `firebase deploy` to commit final updates online.
 
 **Date created:** 20180805<br>
 **Date modified:** 20180805
