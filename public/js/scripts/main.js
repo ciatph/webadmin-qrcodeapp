@@ -19,9 +19,12 @@ var App = function(){
 
     // Submit buttons
     this.btn_submit_reg = document.getElementById('reg_submit');
-    this.btn_submit_login = document.getElementById('reg_submit');
+    this.btn_submit_login = document.getElementById('login_submit');
 
     this.btn_submit_reg.addEventListener('click', this.registerEmailPassword.bind(this));
+    this.btn_submit_login.addEventListener('click', this.signInEmail.bind(this));
+
+    this.initFirebase();
 };
 
 
@@ -108,6 +111,72 @@ App.prototype.swapInterface = function(e){
         this.form_register.style.display = 'none';
         this.form_login.style.display = 'block';        
     }
+};
+
+
+/**
+ * Initialize Firebase user authentication and database
+ */
+App.prototype.initFirebase = function(){
+	this.auth = firebase.auth();
+	this.database = firebase.database();
+
+	this.mGuestRef = firebase.database().ref('guestbook');
+	this.mGuestNamesRef = firebase.database().ref('guestbook_names');
+	this.auth.onAuthStateChanged(this.onAuthStateChanged.bind(this));
+};
+
+
+/**
+ * Add an asynchronous authenticated logged-in User reference
+ */
+App.prototype.onAuthStateChanged = function(user){
+	if(user){
+		console.log("Email: " + user.email);
+	}
+	else{
+		console.log("No user is logged in");	
+	}
+};
+
+
+/**
+ * Initiate app project login using a registered Email/Password
+ */
+App.prototype.signInEmail = function(){
+	console.log("clicked login Email/Pass");
+	var provider = new firebase.auth.EmailAuthProvider();	
+	this.auth.signInWithEmailAndPassword(this.login_email.value, this.login_pass.value).then(function(user){
+		console.log("User created, success! " + user.email + ", uid: " + user.uid);
+        //App.redirect(user.email);
+	}, function(error){
+		// Handle Errors here.
+		var errorCode = error.code;
+		var errorMessage = error.message;
+		  
+		new PNotify({
+			title: errorCode,
+			text: errorMessage,
+			type: 'success',
+			styling: 'bootstrap3'
+		});			
+		console.log(errorCode + "\n" + errorMessage);		
+	}).catch(function(error){
+		new PNotify({
+			title: "Something went wrong",
+			text: error,
+			type: 'danger',
+			styling: 'bootstrap3'
+		});		
+	});
+};
+
+
+/**
+ * Sign-out logged-in user
+ */
+App.prototype.signOut = function(){
+	this.auth.signOut();
 };
 
 
