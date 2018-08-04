@@ -3,10 +3,21 @@ Website users administration page for the qrcodeapp and data dashboard.
 
 ## Dependencies
 
-The following software had been used for this project.
+### Google Super Admin Account
 
-1. Google account with [Firebase](https://firebase.google.com/) Realtime database enabled.
-2. A Firebase project previously set-up using the firebase web console.
+1. Your Google account with [Firebase](https://firebase.google.com/) Realtime database enabled.
+
+2. A Firebase project previously set-up using the firebase web console with the following items:
+
+	1. The _Email/Password_ Sign in method enabled in the Firebase Authentication's **Sign-in method** tab.
+	`https://console.firebase.google.com/u/0/project/<YOUR_PROJECT_NAME>/authentication/providers` 
+
+	2. Your Google email address added in the Firebase Authentication's **Users** tab.
+	`https://console.firebase.google.com/u/0/project/<YOUR_PROJECT_NAME>/authentication/users`
+
+### Tools
+The following software tools had been used for this project.
+
 1. **NodeJS** version 10.6.0
 2. **Npm** version 6.1.0
 3. **firebase-tools** version 4.0.2
@@ -17,7 +28,7 @@ VS Code is the ideal choice of IDE for this project. Otherwise, any text editor 
 ## Installation
 
 ### Note
-A firebase project with Firebase Realtime Database must have been previously set-up and linked with your google account prior to proceeding.
+A firebase project with Firebase Realtime Database must have been previously set-up and linked with your Google account prior to proceeding. The Google Super Admin account must have also been set-up.
 
 ### Methods
 
