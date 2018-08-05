@@ -55,13 +55,14 @@ A firebase project with Firebase Realtime Database must have been previously set
 	- Press Enter (yes)
 13. _Configure as a single-page app (rewrite all urls to /index.html)? (y/N)_ 
 	- Choose `N`
+14. Open `/public/js/scripts/utils.js`. Replace "oelmapps.gmail.com" with your <YOUR\_GOOGLE\_ACCOUNT>.
 
 ### Update and Upload Firebase Functions
 1. Navigate into the /functions directory from the command line.
 2. Run `npm i --save firebase-functions`
 3. Run `npm install`
 4. Open `/functions/index.js` and replace all instances of `oelmapps@gmail.com` with <YOUR\_GOOGLE\_ACCOUNT>.
-5. Upload the functions (for user registration & login to work)
+5. Navigate back to the root directory. Upload the functions (for user registration & login to work)
    - `firebase deploy --only functions2`
 
 ### Run the Website
