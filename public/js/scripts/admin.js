@@ -1,46 +1,71 @@
 var Admin = function(){
-
+    this.btn_logout = document.getElementById('btn_logout');
+    this.initFirebase();
 };
 
+Admin.prototype.initFirebase = function(){
+	this.auth = firebase.auth();
+	this.database = firebase.database();
+
+	this.mGuestsRef = firebase.database().ref('guestbook');
+	this.mGuestNamesRef = firebase.database().ref('guestbook_names');
+	this.mUserRef = firebase.database().ref('users');
+	this.mStatusRef = firebase.database().ref('settings/account_status');
+	this.mTypeRef = firebase.database().ref('settings/account_type');	
+	this.mCountRef = firebase.database().ref('count');
+
+    this.btn_logout.addEventListener('click', this.signOut.bind(this));
+    this.auth.onAuthStateChanged(this.onAuthStateChanged.bind(this));
+    /*
+	this.mGuestsRef.on('child_removed', function(snapshot) {
+		deleteRow(snapshot.key);
+    });
+    	
+    this.loadConstants();
+    */
+};
+
+
 /**
- * Creates a new table that contains the key field name and value of a firebase node
- * Appends a checkbox and listens for click events on user checked
- * @param {ID of table to create} tblName 
- * @param {JSON key-value pair to be displayed per table row} rowData 
- * @param {ID or CLASS of html dom object in which to insert table after} rootNode
+ * Add an asynchronous authenticated logged-in User reference
  */
-Admin.prototype.createTableApi = function(tblName, rowData, rootNode){
-    var start = '#';
-    var self = this;
+Admin.prototype.onAuthStateChanged = function(user){
+	var logout = false;
 
-    start += (rootNode !== undefined && rootNode !== null) ? rootNode : 'api_common';
-    var tableClasses = ['table,table-sm,table-bordered,table-condensed,table-striped']; 
-  
-    var table = $('<table class="table table-sm table-bordered table-condensed table-striped">');
-    table.attr('id', tblName);
-  
-    // table headers
-    // table.append('<thead><th>Field Name</th><th>Description</th></thead>');
-    var field = tblName.replace(/api_/g, '').replace('_', ' ').toUpperCase();
-    
-    // table headers and buttons
-    table.append('<tr><td class="table_headers" colspan="2"><b>'+ tblName.replace(/api_/g, '').replace('_', ' ').toUpperCase() 
-        + '</b><span style="float: right;">' 
-        // Select/unselect buttons
-        + '<button id="deselect_' + tblName + '" type="button" class="btn btn-primary">De-select</button> &nbsp; ' 
-        + '<button id="select_' + tblName + '" type="button" class="btn btn-primary">Select All</button>'
-        + '</td></tr>');
-    table.append('<tr><th>Field Name</th><th>Description</th></tr>');
-  
-    for(var key in rowData){
-        var row = '<tr><td><div class="checkbox"><label><input type="checkbox" id="' + key + '">'+ key +'</label></div></td>' + 
-        '<td>'+ rowData[key] +'</td></tr>';
-        table.append(row);
+	if(user){
+		if(Utils.admins.indexOf(user.email) == -1){
+			this.auth.signOut();
+			logout = true;
+		}		
+		console.log("Email: " + user.email);
+		// initialize user
+		$(".username").html($(".username").html() + ', ' + user.email);
+		// FirebaseReset.initNodes();
+	}
+	else{
+		logout = true;
+		console.log("No user is logged in");
+	}
 
-        // Push unique variable field names
-        this.keys.push(key);
-    }
-  
-    table.insertAfter(start);
-    return table;
-  }
+	if(logout){
+		// Note: Replace with '/' when uploading to firebase hosting
+		window.location = Utils.redirect_logout;
+	}
+	else{
+		// this.listGuests();
+	}
+};
+
+
+/**
+ * Sign-out logged-in user
+ */
+Admin.prototype.signOut = function(){
+	this.auth.signOut();
+};
+
+
+window.onload = function(){
+    window.Utils = new Utils();
+    window.Admin = new Admin();
+};

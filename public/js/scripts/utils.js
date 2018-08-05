@@ -1,8 +1,12 @@
 var Utils = function(){
-
+    this.admins = ['oelmapps@gmail.com'];
+    this.redirect_logout = 'index.html';
 };
 
 
+/**
+ * Get the current date from PC's local time
+ */
 Utils.prototype.getCurrentDate = function(){
     var today = new Date();
     var dd = today.getDate();

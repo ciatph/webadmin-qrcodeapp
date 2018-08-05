@@ -147,8 +147,8 @@ App.prototype.signInEmail = function(){
 	console.log("clicked login Email/Pass");
 	var provider = new firebase.auth.EmailAuthProvider();	
 	this.auth.signInWithEmailAndPassword(this.login_email.value, this.login_pass.value).then(function(user){
-		console.log("User created, success! " + user.email + ", uid: " + user.uid);
-        //App.redirect(user.email);
+		console.log("User created, success! " + user.user.email + ", uid: " + user.user.uid);
+        App.redirect(user.user.email);
 	}, function(error){
 		// Handle Errors here.
 		var errorCode = error.code;
@@ -179,6 +179,14 @@ App.prototype.signOut = function(){
 	this.auth.signOut();
 };
 
+
+/**
+ * Redirect to app dashboard
+ */
+App.prototype.redirect = function(user){
+	window.Utils = new Utils();
+	window.location = (Utils.admins.indexOf(user) >= 0) ? "useradmin.html" : "page.html";
+};
 
 window.onload = function(){
     window.App = new App();

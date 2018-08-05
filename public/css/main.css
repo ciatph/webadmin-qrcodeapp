@@ -49,6 +49,8 @@ body {
   border-top-right-radius: 0;
 }
 
-.user_profile{
+.user_profile, a:hover {
   color: #ffffff;
 }
+
+
