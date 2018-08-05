@@ -63,7 +63,7 @@ A firebase project with Firebase Realtime Database must have been previously set
 3. Run `npm install`
 4. Open `/functions/index.js` and replace all instances of `oelmapps@gmail.com` with <YOUR\_GOOGLE\_ACCOUNT>.
 5. Navigate back to the root directory. Upload the functions (for user registration & login to work)
-   - `firebase deploy --only functions2`
+   - `firebase deploy --only functions`
 
 ### Run the Website
 1. Run `firebase serve` to test and debug functions and hosting locally.
