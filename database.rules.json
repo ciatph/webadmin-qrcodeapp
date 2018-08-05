@@ -2,6 +2,18 @@
   "rules": {
     ".read": "auth != null && auth.token.email === 'oelmapps@gmail.com'",
     ".write": "auth != null && auth.token.email === 'oelmapps@gmail.com'",
+    "settings": {
+      // Type of User account: 1=user, 2=administrator, 3=super administrator
+      "account_type": {
+				".read": "(auth != null && root.child('users').hasChild(auth.uid)) || auth.token.email === 'oelmapps@gmail.com'",
+        ".write": "auth != null && auth.token.email === 'oelmapps@gmail.com'" 
+      },
+      // User account status: 1=active, 2=suspended, 3=waiting approval  
+      "account_status": {
+				".read": "(auth != null && root.child('users').hasChild(auth.uid)) || auth.token.email === 'ciat.ph@gmail.com' || auth.token.email === 'oelmapps@gmail.com'",
+        ".write": "auth.token.email === 'oelmapps@gmail.com'"  
+      }  
+    },
     // Users are admin-verified users of this app, from guestbook
     // They can view, edit and delete their own messages.
     // Only the super admin can write valid registered users here
@@ -41,6 +53,13 @@
     "count": {
       ".read": "auth != null",
       ".write": "auth != null"
+    },
+    // Will contain "userid" => eventid => nameid => name
+    "attendance_list": {   
+      "$uid": {
+        ".read": "auth != null && root.child('users').hasChild(auth.uid)", 
+        ".write": "auth.uid !== null && auth.uid === newData.child('_userid').val() && root.child('users').hasChild(auth.uid) && root.child('users').child(auth.uid).child('acct_status').val() === root.child('settings/account_status').child('active').val()"    
+      }
     }
   }
 }
